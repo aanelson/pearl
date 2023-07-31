@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:collection/collection.dart';
 import 'package:pearl/src/model/buyer.dart';
 
@@ -19,8 +21,7 @@ class CalculateNeighborhoodWithBuyer {
 
 NeighborhoodsWithBuyers calculateNeighborhoodWithBuyer(
     List<Neighborhood> neighborhoods, List<Buyer> buyers,
-    {void Function(int) workDone = _workDone}) {
-  // final (buyer, neighborhood) = parseFile(file);
+    {void Function(double) workDone = _workDone}) {
   final numberOfNeighborhoods = neighborhoods.length + 1;
 
   final flatRanking = buyers
@@ -28,21 +29,29 @@ NeighborhoodsWithBuyers calculateNeighborhoodWithBuyer(
           .map((e) => Ranking.fromBuyerAndNeighborhood(element, e)))
       .sorted((a, b) => b.score.compareTo(a.score))
       .toList();
-  final merge =
-      _CalculateNeighborhoodWithBuyer(numberOfNeighborhoods, flatRanking);
+  _workDone(5);
+  final merge = _CalculateNeighborhoodWithBuyer(
+      numberOfNeighborhoods, flatRanking, workDone);
   return merge.build();
 }
 
-void _workDone(int time) {}
+void _workDone(double time) {}
 
 class _CalculateNeighborhoodWithBuyer {
-  _CalculateNeighborhoodWithBuyer(this.neighborhoodSize, this.list);
+  _CalculateNeighborhoodWithBuyer(
+    this.neighborhoodSize,
+    this.list,
+    this._workdone,
+  );
+  final void Function(double) _workdone;
   final int neighborhoodSize;
   final List<Ranking> list;
   final Storage _storage = Storage();
 
   NeighborhoodsWithBuyers build() {
-    for (final item in list) {
+    for (final (i, item) in list.indexed) {
+      sleep(Duration(milliseconds: 25));
+      _workDone(i / list.length);
       _maybeAdd(item);
     }
     return _storage.store;

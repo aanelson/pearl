@@ -15,6 +15,8 @@ void main(List<String> arguments) {
   final results = parser.parse(arguments);
   final filepath = results[input];
   final file = File(filepath);
+
+  // final scheme =
   if (file.existsSync()) {
     final (buyers, neighborhoods) = parseFile(file);
     final result = calculateNeighborhoodWithBuyer(neighborhoods, buyers);
