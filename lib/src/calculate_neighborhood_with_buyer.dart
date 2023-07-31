@@ -6,6 +6,7 @@ import 'model/ranking.dart';
 
 typedef BuyerName = String;
 typedef NeighborhoodName = String;
+typedef NeighborhoodsWithBuyers = Map<NeighborhoodName, List<Ranking>>;
 
 class CalculateNeighborhoodWithBuyer {
   const CalculateNeighborhoodWithBuyer(
@@ -16,7 +17,7 @@ class CalculateNeighborhoodWithBuyer {
   final List<Buyer> buyers;
 }
 
-Map<NeighborhoodName, List<Ranking>> calculateNeighborhoodWithBuyer(
+NeighborhoodsWithBuyers calculateNeighborhoodWithBuyer(
     List<Neighborhood> neighborhoods, List<Buyer> buyers,
     {void Function(int) workDone = _workDone}) {
   // final (buyer, neighborhood) = parseFile(file);
@@ -40,7 +41,7 @@ class _CalculateNeighborhoodWithBuyer {
   final List<Ranking> list;
   final Storage _storage = Storage();
 
-  Map<NeighborhoodName, List<Ranking>> build() {
+  NeighborhoodsWithBuyers build() {
     for (final item in list) {
       _maybeAdd(item);
     }
