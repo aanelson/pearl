@@ -20,8 +20,7 @@ class CalculateNeighborhoodWithBuyer {
 }
 
 NeighborhoodsWithBuyers calculateNeighborhoodWithBuyer(
-    List<Neighborhood> neighborhoods, List<Buyer> buyers,
-    {void Function(double) workDone = _workDone}) {
+    List<Neighborhood> neighborhoods, List<Buyer> buyers) {
   final numberOfNeighborhoods = neighborhoods.length + 1;
 
   final flatRanking = buyers
@@ -30,8 +29,8 @@ NeighborhoodsWithBuyers calculateNeighborhoodWithBuyer(
       .sorted((a, b) => b.score.compareTo(a.score))
       .toList();
   _workDone(5);
-  final merge = _CalculateNeighborhoodWithBuyer(
-      numberOfNeighborhoods, flatRanking, workDone);
+  final merge =
+      _CalculateNeighborhoodWithBuyer(numberOfNeighborhoods, flatRanking);
   return merge.build();
 }
 
@@ -41,9 +40,7 @@ class _CalculateNeighborhoodWithBuyer {
   _CalculateNeighborhoodWithBuyer(
     this.neighborhoodSize,
     this.list,
-    this._workdone,
   );
-  final void Function(double) _workdone;
   final int neighborhoodSize;
   final List<Ranking> list;
   final Storage _storage = Storage();
