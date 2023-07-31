@@ -47,7 +47,6 @@ class _CalculateNeighborhoodWithBuyer {
 
   NeighborhoodsWithBuyers build() {
     for (final (i, item) in list.indexed) {
-      sleep(Duration(milliseconds: 25));
       _workDone(i / list.length);
       _maybeAdd(item);
     }
