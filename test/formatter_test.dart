@@ -10,6 +10,18 @@ void main() {
         Ranking(neighborhoodName: 'N0', buyerName: 'H2', score: 44, ranking: 0)
       ]
     });
-    expect(format, ['N0: H5(99) H2(44)']);
+    expect(format, 'N0: H5(99) H2(44)');
+  });
+
+  test('order neighborhoods', () {
+    final format = defaultFileformatter({
+      'N2': [
+        Ranking(neighborhoodName: 'N2', buyerName: 'H2', score: 44, ranking: 0)
+      ],
+      'N0': [
+        Ranking(neighborhoodName: 'N0', buyerName: 'H5', score: 99, ranking: 0),
+      ]
+    });
+    expect(format, 'N0: H5(99)\nN2: H2(44)');
   });
 }

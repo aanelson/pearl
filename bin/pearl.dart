@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:pearl/pearl.dart' as pearl;
 import 'package:pearl/src/calculate_neighborhood_with_buyer.dart';
+import 'package:pearl/src/default_file_formatter.dart';
 import 'package:pearl/src/file_reader.dart';
 
 const input = 'input';
@@ -18,8 +18,10 @@ void main(List<String> arguments) {
   if (file.existsSync()) {
     final (buyers, neighborhoods) = parseFile(file);
     final result = calculateNeighborhoodWithBuyer(neighborhoods, buyers);
+    final formattedData = defaultFileformatter(result);
+    final writeFile = File(results[output]);
+    writeFile.writeAsStringSync(formattedData);
   } else {
     exitCode = 2;
   }
-  // print('Hello world: ${pearl.calculate()}!');
 }

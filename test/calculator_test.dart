@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:pearl/src/calculate_neighborhood_with_buyer.dart';
 import 'package:pearl/src/file_reader.dart';
 import 'package:pearl/src/model/ranking.dart';

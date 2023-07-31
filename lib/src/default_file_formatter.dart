@@ -1,10 +1,14 @@
+import 'package:collection/collection.dart';
+
 import 'calculate_neighborhood_with_buyer.dart';
 
-List<String> defaultFileformatter(NeighborhoodsWithBuyers rankings) {
-  final display = <String>[];
-  rankings.forEach((key, value) {
-    final buyers = value.map((e) => '${e.buyerName}(${e.score})').join(' ');
-    display.add('$key: $buyers');
+String defaultFileformatter(NeighborhoodsWithBuyers rankings) {
+  final sortedKeys = rankings.keys.sorted((a, b) => a.compareTo(b));
+  final display = sortedKeys.map((e) {
+    final buyers =
+        rankings[e]!.map((e) => '${e.buyerName}(${e.score})').join(' ');
+    return '$e: $buyers';
   });
-  return display;
+
+  return display.join('\n');
 }
